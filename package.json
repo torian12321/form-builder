@@ -46,6 +46,7 @@
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.14.14",
     "@mui/material": "^5.14.14",
-    "@mui/x-date-pickers": "^6.16.2"
+    "@mui/x-date-pickers": "^6.16.2",
+    "moment": "^2.29.4"
   }
 }
