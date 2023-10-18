@@ -1,6 +1,5 @@
 import { ResponsiveDrawer } from "./ui/Layout";
 import { FormDemo } from "./ui/FormDemo";
-import { ToggleMode } from "./ui/ToggleMode";
 import { CodeExample } from "./ui/CodeExample";
 import { useAppSelector } from "./store/actions";
 import { getFieldsList } from "./store/selectors/fields.selectors";
@@ -14,7 +13,6 @@ const App = () => {
 
   return (
     <ResponsiveDrawer>
-      <ToggleMode />
       {displayMode === MODES.VISUAL ? (
         <FormDemo />
       ) : (
