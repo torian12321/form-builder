@@ -26,9 +26,9 @@ export const InfoListHeader = styled(MuiAccordionSummary)(({ theme }) => ({
   },
 }));
 
-export const InfoMessageTitle = styled(AlertTitle)(({ theme }) => ({
+export const InfoMessageTitle = styled(AlertTitle)({
   margin: 0,
-}));
+});
 export const InfoMessageBody = styled('div')(({ theme }) => ({
   marginTop: theme.spacing(0.5),
 }));
