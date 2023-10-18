@@ -2,7 +2,7 @@ import { Button, FormRenderer } from "../../../lib/main";
 import { useFieldActions } from "../../store/actions/fields";
 import { getFieldsList } from "../../store/selectors/fields.selectors";
 import { useAppSelector } from "../../store/actions";
-import { getSelectedFieldDetails } from "../../store/selectors/selectedField.selectors";
+import { getSelectedFieldDetails } from "../../store/selectors/settings.selectors";
 import {
   Wrapper,
   selectedFieldStyles,

@@ -10,8 +10,8 @@ import ListItemText from "@mui/material/ListItemText";
 import { useAppSelector } from "../../../store/actions";
 import { useGetFieldById } from "../../../store/selectors/fields.selectors";
 import { FIELD_TYPE } from "../../../../lib/main";
-import { useSelectedFieldActions } from "../../../store/actions/selectedField";
-import { getSelectedField } from "../../../store/selectors/selectedField.selectors";
+import { useSettingsActions } from "../../../store/actions/settings";
+import { getSelectedField } from "../../../store/selectors/settings.selectors";
 
 interface Props {
   fieldId: string;
@@ -25,7 +25,7 @@ const ICONS: { [fieldType: string]: JSX.Element } = {
 
 export const QuestionItem = ({ fieldId }: Props) => {
   const selectedField = useAppSelector(getSelectedField);
-  const { setSelectedField, unsetSelectedField } = useSelectedFieldActions();
+  const { setSelectedField, unsetSelectedField } = useSettingsActions();
   const { label, type } = useGetFieldById(fieldId);
 
   const handleOnClick = () => {
