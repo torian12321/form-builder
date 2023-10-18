@@ -1,13 +1,13 @@
-import type { KeyboardEvent, ChangeEvent } from 'react';
-import type { TextFieldProps } from '@mui/material/TextField';
-import { AdapterMoment as MuiAdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
-import { DesktopDateTimePicker as MuiDateTimePicker } from '@mui/x-date-pickers/DesktopDateTimePicker';
-import { LocalizationProvider as MuiLocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { Moment } from 'moment';
-import { FIELD_TYPE } from '../../FormRenderer.constants';
-import type { FieldProps } from './Fields.types';
-import { formatMomentToDateTime } from './Fields.utils';
-import { SharedTextField, SharedTextFieldProps } from './SharedTextField';
+import type { TextFieldProps } from "@mui/material/TextField";
+import type { PickersActionBarAction } from "@mui/x-date-pickers";
+import { AdapterMoment as MuiAdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
+import { DesktopDateTimePicker as MuiDateTimePicker } from "@mui/x-date-pickers/DesktopDateTimePicker";
+import { LocalizationProvider as MuiLocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { renderTimeViewClock } from "@mui/x-date-pickers/timeViewRenderers";
+import moment, { Moment } from "moment";
+import { FIELD_TYPE } from "../../FormRenderer.constants";
+import type { FieldProps } from "./Fields.types";
+import { formatMomentToDateTime, getSlotPropsTextField } from "./Fields.utils";
 
 export const DateTimeField = ({
   type,
@@ -15,11 +15,17 @@ export const DateTimeField = ({
   name,
   value,
   error,
-  disabled,
+  disabled = false,
+  required = false,
   onChange,
   onBlur,
 }: FieldProps): JSX.Element | null => {
   if (type !== FIELD_TYPE.DATE_TIME) return null;
+
+  const fieldValue = value ? moment(value) : null;
+  const actionBarButtons: PickersActionBarAction[] = required
+    ? ["today"]
+    : ["clear", "today"];
 
   const handleOnChange = (newValue: Moment | null) => {
     if (!newValue) {
@@ -30,54 +36,37 @@ export const DateTimeField = ({
     }
   };
 
-  // This is needed to avoid breaking if the user types
-  // am or pm. Pressing a or p will autocomplete m for
-  // the users
-  const onlyAcceptAorP = (ev: KeyboardEvent) => {
-    const { value: targetValue } = ev.target as HTMLInputElement;
-    const selectedText = document.getSelection()?.toString();
-
-    if (ev.key.match(/\d+/) && targetValue.length < 16) return;
-
-    const key = ev.key.toLowerCase();
-    if (key !== 'a' && key !== 'p' && !selectedText) {
-      ev.preventDefault();
-      ev.stopPropagation();
-    }
-  };
-
-  const removeExtraCharacterOnInput = (ev: ChangeEvent<HTMLInputElement>) => {
-    if (ev.target.value.length > 17) {
-      ev.target.value = ev.target.value.slice(0, 17);
-    }
-    ev.target.value = ev.target.value.toLowerCase();
-  };
-
   return (
     <MuiLocalizationProvider
       dateAdapter={MuiAdapterMoment}
-      adapterLocale='en-US'
+      adapterLocale="en-US"
     >
       <MuiDateTimePicker
-        ampmInClock={true}
-        acceptRegex={/[\d(a|p)]/gi}
-        inputFormat='MM/DD/YYYY hh:mm a'
-        mask='__/__/____ __:__ _m'
+        ampm
+        ampmInClock
+        format="MM/DD/YYYY hh:mm a"
         label={label}
-        value={value}
+        value={fieldValue}
         disabled={disabled}
         onChange={handleOnChange}
         onAccept={onBlur}
-        renderInput={(params: TextFieldProps) => (
-          <SharedTextField
-            {...(params as SharedTextFieldProps)}
-            name={name}
-            error={error}
-            onBlur={onBlur}
-            onKeyDown={onlyAcceptAorP}
-            onInput={removeExtraCharacterOnInput}
-          />
-        )}
+        viewRenderers={{
+          hours: renderTimeViewClock,
+          minutes: renderTimeViewClock,
+          seconds: null,
+        }}
+        slotProps={{
+          actionBar: {
+            actions: actionBarButtons,
+          },
+          textField: (params: TextFieldProps) => ({
+            ...getSlotPropsTextField(params),
+            error,
+            name,
+            id: name,
+            onBlur,
+          }),
+        }}
       />
     </MuiLocalizationProvider>
   );

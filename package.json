@@ -18,13 +18,18 @@
     "build-lib": "tsc --p ./tsconfig-build.json && vite build",
     "prepublishOnly": "npm run build-lib",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest run src",
+    "test:watch": "vitest src"
   },
   "peerDependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^2.4.6",
+    "@testing-library/react": "^14.0.0",
+    "@types/jest": "^29.5.5",
     "@types/node": "^20.8.6",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
@@ -35,11 +40,13 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
     "glob": "^10.3.10",
+    "jest": "^29.7.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "typescript": "^5.0.2",
     "vite": "^4.4.5",
-    "vite-plugin-dts": "^3.6.0"
+    "vite-plugin-dts": "^3.6.0",
+    "vitest": "^0.34.6"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",

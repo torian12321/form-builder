@@ -1,12 +1,12 @@
-import { TextFieldProps } from '@mui/material/TextField';
-import { AdapterMoment as MuiAdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
-import { DesktopDatePicker as MuiDesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
-import { LocalizationProvider as MuiLocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { Moment } from 'moment';
-import { FIELD_TYPE } from '../../FormRenderer.constants';
-import type { FieldProps } from './Fields.types';
-import { formatMomentToDate } from './Fields.utils';
-import { SharedTextField, SharedTextFieldProps } from './SharedTextField';
+import type { TextFieldProps } from "@mui/material/TextField";
+import type { PickersActionBarAction } from "@mui/x-date-pickers";
+import { AdapterMoment as MuiAdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
+import { DesktopDatePicker as MuiDesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
+import { LocalizationProvider as MuiLocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import moment, { Moment } from "moment";
+import { FIELD_TYPE } from "../../FormRenderer.constants";
+import type { FieldProps } from "./Fields.types";
+import { formatMomentToDate, getSlotPropsTextField } from "./Fields.utils";
 
 export const DateField = ({
   type,
@@ -14,11 +14,17 @@ export const DateField = ({
   name,
   value,
   error,
-  disabled,
+  disabled = false,
+  required = false,
   onChange,
   onBlur,
 }: FieldProps): JSX.Element | null => {
   if (type !== FIELD_TYPE.DATE) return null;
+
+  const fieldValue = value ? moment(value) : null;
+  const actionBarButtons: PickersActionBarAction[] = required
+    ? ["today"]
+    : ["clear", "today"];
 
   const handleOnChange = (newValue: Moment | null) => {
     if (!newValue) {
@@ -32,22 +38,27 @@ export const DateField = ({
   return (
     <MuiLocalizationProvider
       dateAdapter={MuiAdapterMoment}
-      adapterLocale='en-US'
+      adapterLocale="en-US"
     >
       <MuiDesktopDatePicker
+        format="MM/DD/YYYY"
         label={label}
-        value={value}
+        value={fieldValue}
         disabled={disabled}
         onChange={handleOnChange}
         onAccept={onBlur}
-        renderInput={(params: TextFieldProps) => (
-          <SharedTextField
-            {...(params as SharedTextFieldProps)}
-            name={name}
-            error={error}
-            onBlur={onBlur}
-          />
-        )}
+        slotProps={{
+          actionBar: {
+            actions: actionBarButtons,
+          },
+          textField: (params: TextFieldProps) => ({
+            ...getSlotPropsTextField(params),
+            error,
+            name,
+            id: name,
+            onBlur,
+          }),
+        }}
       />
     </MuiLocalizationProvider>
   );
