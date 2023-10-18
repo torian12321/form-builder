@@ -1,22 +1,11 @@
-import { Button, FormRenderer } from "../lib/main";
 import "./App.css";
-import { ResponsiveDrawer } from "./Layout";
-import { useFieldActions } from "./store/actions/fields";
-import { getFieldsList } from "./store/selectors/fields.selectors";
-import { useAppSelector } from "./store/actions";
+import { ResponsiveDrawer } from "./ui/Layout";
+import { FormDemo } from "./ui/FormDemo";
 
-const App = () => {
-  const { resetFields } = useFieldActions();
-  const fields = useAppSelector(getFieldsList);
-
-  return (
-    <ResponsiveDrawer>
-      <section>
-        <FormRenderer id="demo-form" fields={fields} />
-        <Button onClick={resetFields}>Reset</Button>
-      </section>
-    </ResponsiveDrawer>
-  );
-};
+const App = () => (
+  <ResponsiveDrawer>
+    <FormDemo />
+  </ResponsiveDrawer>
+);
 
 export default App;

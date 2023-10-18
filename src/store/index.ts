@@ -1,10 +1,12 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import counterReducer from './slices/counterSlice';
 import fieldsReducer from './slices/fieldsSlice';
+import selectedFieldReducer from './slices/selectedFieldSlice';
 
 const rootReducer = combineReducers({
   counter: counterReducer,
   fields: fieldsReducer,
+  selectedField: selectedFieldReducer,
 });
 
 export const store = configureStore({

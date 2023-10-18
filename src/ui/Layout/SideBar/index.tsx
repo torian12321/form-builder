@@ -2,9 +2,9 @@ import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
 import Toolbar from "@mui/material/Toolbar";
-import { getFieldIds } from "../../store/selectors/fields.selectors";
-import { useAppSelector } from "../../store/actions";
-import { useFieldActions } from "../../store/actions/fields";
+import { getFieldIds } from "../../../store/selectors/fields.selectors";
+import { useAppSelector } from "../../../store/actions";
+import { useFieldActions } from "../../../store/actions/fields";
 import { QuestionsList, FooterButton } from "./SideBar.styles";
 import { QuestionItem } from "./SideBar.QuestionItem";
 
@@ -33,8 +33,8 @@ export const SideBar = () => {
         <Toolbar />
         <Divider />
         <QuestionsList>
-          {fieldIds.map((fieldId) => (
-            <QuestionItem key={fieldId} fieldId={fieldId} />
+          {fieldIds.map((fieldId, index) => (
+            <QuestionItem key={index} fieldId={fieldId} />
           ))}
         </QuestionsList>
         <Divider />

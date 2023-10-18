@@ -4,7 +4,7 @@ import type { FieldsState } from '../slices/fieldsSlice';
 import type { RootState } from '../';
 import { useAppSelector } from '../actions';
 
-const getFields = (state: RootState): FieldsState => state.fields || {};
+export const getFields = (state: RootState): FieldsState => state.fields || {};
 
 export const getFieldsList = createSelector(
   getFields,

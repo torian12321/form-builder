@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit'
-// import type { PayloadAction } from '@reduxjs/toolkit'
 import { v4 as uuidv4 } from 'uuid';
 import { FIELD_TYPE } from '../../../lib/main'
 import type { Field } from '../../../lib/main'
@@ -9,7 +8,7 @@ export interface FieldsState {
 }
 
 const DEFAULT_FIELD: Field = {
-  name: 'aa',
+  name: 'text',
   label: 'I am a test',
   placeholder: 'i am a placeholder',
   disabled: false,
@@ -36,23 +35,12 @@ export const fieldsSlice = createSlice({
   name: 'fields',
   initialState,
   reducers: {
-    add: (state) => {
-      // Redux Toolkit allows us to write "mutating" logic in reducers. It
-      // doesn't actually mutate the state because it uses the Immer library,
-      // which detects changes to a "draft state" and produces a brand new
-      // immutable state based off those changes
-      return {
-        ...state,
-        [uuidv4()]: DEFAULT_FIELD,
-      }
-    },
+    add: (state) => ({
+      ...state,
+      [uuidv4()]: DEFAULT_FIELD,
+    }
+    ),
     reset: () => initialState,
-    // decrement: (state) => {
-    //   state.value -= 1
-    // },
-    // incrementByAmount: (state, action: PayloadAction<number>) => {
-    //   state.value += action.payload
-    // },
   },
 })
 

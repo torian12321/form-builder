@@ -10,14 +10,10 @@ export const useFieldActions = (): UseFieldActions => {
   const dispatch = useAppDispatch();
 
   const addField = (): void => {
-    dispatch(
-      add(),
-    );
+    dispatch(add());
   };
   const resetFields = (): void => {
-    dispatch(
-      reset(),
-    );
+    dispatch(reset());
   };
 
   return {
