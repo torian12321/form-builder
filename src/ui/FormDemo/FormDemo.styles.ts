@@ -8,7 +8,9 @@ export const Wrapper = styled('section')({
 export const unselectedFieldStyles: SxProps<Theme> = {
   opacity: .4,
   transition: 'opacity .6s',
+  borderRadius: '8px',
 };
 export const selectedFieldStyles: SxProps<Theme> = {
   opacity: 1,
+  outline: '#b5d3f1 2px solid',
 };

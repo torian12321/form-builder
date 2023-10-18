@@ -8,18 +8,18 @@ export interface FieldsState {
 }
 
 const DEFAULT_FIELD: Field = {
+  type: FIELD_TYPE.TEXT,
   name: 'text',
   label: 'I am a test',
   placeholder: 'i am a placeholder',
   disabled: false,
   properties: {},
-  type: FIELD_TYPE.TEXT,
 }
 const initialState: FieldsState = {
   [uuidv4()]: DEFAULT_FIELD,
   [uuidv4()]: {
     type: FIELD_TYPE.LONG_TEXT,
-    name: "long_text",
+    name: "long_text_field",
     label: "Field Type - long text",
     properties: {},
   },
