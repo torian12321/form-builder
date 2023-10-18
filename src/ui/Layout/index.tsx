@@ -1,13 +1,15 @@
 import type { PropsWithChildren } from "react";
-import Box from "@mui/material/Box";
 import { Header } from "./Header";
 import { SideBar } from "./SideBar";
 import { Body } from "./Body";
+import { Wrapper, Content } from "./Layout.styles";
 
 export const ResponsiveDrawer = ({ children }: PropsWithChildren) => (
-  <Box sx={{ display: "flex" }}>
-    <Header />
+  <Wrapper>
     <SideBar />
-    <Body>{children}</Body>
-  </Box>
+    <Content>
+      <Header />
+      <Body>{children}</Body>
+    </Content>
+  </Wrapper>
 );

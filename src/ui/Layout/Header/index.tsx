@@ -1,19 +1,11 @@
-import AppBar from "@mui/material/AppBar";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-
-const drawerWidth = 240;
+import { Wrapper } from "./Header.styles";
 
 export const Header = () => (
-  <AppBar
-    position="fixed"
-    sx={{
-      width: { sm: `calc(100% - ${drawerWidth}px)` },
-      ml: { sm: `${drawerWidth}px` },
-    }}
-  >
+  <Wrapper>
     <Toolbar>
       <IconButton
         color="inherit"
@@ -27,5 +19,5 @@ export const Header = () => (
         Form Builder
       </Typography>
     </Toolbar>
-  </AppBar>
+  </Wrapper>
 );
