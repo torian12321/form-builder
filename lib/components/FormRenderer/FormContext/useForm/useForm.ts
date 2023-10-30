@@ -51,7 +51,7 @@ export const useForm = ({
     const currentField = formFields[fieldName];
     const { messages, isValid } = getFieldValidations(fieldName);
     const showValidations =
-      (currentField.touched && !validateAfterSubmit && !isValid) ||
+      (currentField?.touched && !validateAfterSubmit && !isValid) ||
       (formSubmited && !isValid);
 
     return {

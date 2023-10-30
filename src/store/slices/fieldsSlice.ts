@@ -37,7 +37,10 @@ export const fieldsSlice = createSlice({
   reducers: {
     add: (state) => ({
       ...state,
-      [uuidv4()]: DEFAULT_FIELD,
+      [uuidv4()]: {
+        ...DEFAULT_FIELD,
+        name: uuidv4(),
+      },
     }
     ),
     reset: () => initialState,
