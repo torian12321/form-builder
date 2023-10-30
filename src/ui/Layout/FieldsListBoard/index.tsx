@@ -3,10 +3,10 @@ import Toolbar from "@mui/material/Toolbar";
 import { getFieldIds } from "../../../store/selectors/fields.selectors";
 import { useAppSelector } from "../../../store/actions";
 import { useFieldActions } from "../../../store/actions/fields";
-import { Wrapper, QuestionsList, FooterButton } from "./SideBar.styles";
-import { QuestionItem } from "./SideBar.QuestionItem";
+import { Wrapper, QuestionsList, FooterButton } from "./FieldsListBoard.styles";
+import { QuestionItem } from "./FieldsListBoard.QuestionItem";
 
-export const SideBar = () => {
+export const FieldsListBoard = () => {
   const { addField } = useFieldActions();
   const fieldIds = useAppSelector(getFieldIds);
 
