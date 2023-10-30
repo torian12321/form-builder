@@ -3,6 +3,7 @@ import { SxProps, Theme } from '@mui/material';
 
 export const Wrapper = styled('section')({
   width: 460,
+  margin: 'auto',
 });
 
 export const unselectedFieldStyles: SxProps<Theme> = {
