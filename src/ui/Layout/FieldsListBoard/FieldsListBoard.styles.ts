@@ -1,5 +1,6 @@
 import { styled } from '@mui/material/styles';
 import List from "@mui/material/List";
+import ListItemText from "@mui/material/ListItemText";
 
 export const Wrapper = styled('div')({
   height: '100%',
@@ -18,4 +19,12 @@ export const QuestionsList = styled(List)({
 
 export const FooterButton = styled('button')({
   borderRadius: 0,
+});
+
+export const QuestionsItemText = styled(ListItemText)({
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
+  display: '-webkit-box',
+  '-webkit-line-clamp': '2',
+  '-webkit-box-orient': 'vertical',
 });

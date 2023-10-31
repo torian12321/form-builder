@@ -6,12 +6,12 @@ import NumbersIcon from "@mui/icons-material/Numbers";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
 import { useAppSelector } from "../../../store/actions";
 import { useGetFieldById } from "../../../store/selectors/fields.selectors";
 import { FIELD_TYPE } from "../../../../lib/main";
 import { useSettingsActions } from "../../../store/actions/settings";
 import { getSelectedField } from "../../../store/selectors/settings.selectors";
+import { QuestionsItemText } from "./FieldsListBoard.styles";
 
 interface Props {
   fieldId: string;
@@ -40,7 +40,7 @@ export const QuestionItem = ({ fieldId }: Props) => {
     <ListItem disablePadding onClick={handleOnClick}>
       <ListItemButton>
         <ListItemIcon>{ICONS[type] || <InboxIcon />}</ListItemIcon>
-        <ListItemText primary={label} />
+        <QuestionsItemText primary={label} />
       </ListItemButton>
     </ListItem>
   );
