@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
+import type { PayloadAction } from '@reduxjs/toolkit'
 import { v4 as uuidv4 } from 'uuid';
-import { FIELD_TYPE } from '../../../lib/main'
-import type { Field } from '../../../lib/main'
+import { FIELD_TYPE } from '../../../lib/main';
+import type { Field } from '../../../lib/main';
 
 export interface FieldsState {
   [fieldUuid: string]: Field
@@ -41,13 +42,26 @@ export const fieldsSlice = createSlice({
         ...DEFAULT_FIELD,
         name: uuidv4(),
       },
-    }
-    ),
+    }),
     reset: () => initialState,
+    updateField: (state, action: PayloadAction<{
+      fieldUuid: string;
+      fieldDetails: Field;
+    }>) => {
+      const { fieldUuid, fieldDetails } = action.payload;
+      const field: Field = state[fieldUuid];
+
+      if (field) {
+        state[fieldUuid] = ({
+          ...field,
+          ...fieldDetails
+        }) as Field
+      }
+    },
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { add, reset } = fieldsSlice.actions
+export const { add, reset, updateField } = fieldsSlice.actions
 
 export default fieldsSlice.reducer;

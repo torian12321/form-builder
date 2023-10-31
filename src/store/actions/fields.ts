@@ -1,9 +1,14 @@
-import { add, reset } from '../slices/fieldsSlice';
+import type { Field } from '../../../lib/main';
+import { add, reset, updateField } from '../slices/fieldsSlice';
 import { useAppDispatch } from '.';
 
 interface UseFieldActions {
   addField: () => void;
   resetFields: () => void;
+  updateFieldById: (
+    fieldUuid: string,
+    fieldDetails: Field
+  ) => void
 }
 
 export const useFieldActions = (): UseFieldActions => {
@@ -15,9 +20,16 @@ export const useFieldActions = (): UseFieldActions => {
   const resetFields = (): void => {
     dispatch(reset());
   };
+  const updateFieldById = (
+    fieldUuid: string,
+    fieldDetails: Field
+  ): void => {
+    dispatch(updateField({ fieldUuid, fieldDetails }));
+  };
 
   return {
     addField,
-    resetFields
+    resetFields,
+    updateFieldById,
   };
 };
