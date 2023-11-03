@@ -1,27 +1,17 @@
 import InboxIcon from "@mui/icons-material/MoveToInbox";
-import AbcIcon from "@mui/icons-material/Abc";
-import TextIncreaseIcon from "@mui/icons-material/TextIncrease";
-import NumbersIcon from "@mui/icons-material/Numbers";
-
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import { useAppSelector } from "../../../store/actions";
 import { useGetFieldById } from "../../../store/selectors/fields.selectors";
-import { FIELD_TYPE } from "../../../../lib/main";
 import { useSettingsActions } from "../../../store/actions/settings";
 import { getSelectedField } from "../../../store/selectors/settings.selectors";
 import { QuestionsItemText } from "./FieldsListBoard.styles";
+import { ICONS } from "./FieldsListBoard.icons";
 
 interface Props {
   fieldId: string;
 }
-
-const ICONS: { [fieldType: string]: JSX.Element } = {
-  [FIELD_TYPE.TEXT]: <AbcIcon />,
-  [FIELD_TYPE.LONG_TEXT]: <TextIncreaseIcon />,
-  [FIELD_TYPE.NUMBER]: <NumbersIcon />,
-};
 
 export const QuestionItem = ({ fieldId }: Props) => {
   const selectedField = useAppSelector(getSelectedField);
