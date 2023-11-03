@@ -15,7 +15,11 @@ export const FieldDetailsForm = () => {
   const { updateFieldById } = useFieldActions();
 
   const handleOnChange = ({ values }: OnChangeArgs) => {
-    if (fieldDetails.label !== values.label) {
+    const hasChanges = Object.keys(values).find(
+      (k) => values[k] !== fieldDetails[k]
+    );
+
+    if (hasChanges) {
       updateFieldById(selectedFieldId, values as Field);
     }
   };
