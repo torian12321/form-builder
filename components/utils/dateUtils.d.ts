@@ -1,0 +1,13 @@
+import { Moment } from 'moment';
+export type DateTypes = string | undefined | null;
+export declare const US_DATE_FORMAT = "MM/DD/YYYY";
+export declare const DATETIME_FORMAT = "YYYY-MM-DDTHH:mm:ss";
+export declare const DATE_FORMAT = "YYYY-MM-DD";
+export declare const formatDateUs: (dateString: DateTypes) => string;
+export declare const formatDateUsUtc: (dateString: DateTypes) => string;
+export declare const formatDateTime: (dateString: DateTypes) => Moment;
+export declare const formatDate: (dateString: DateTypes) => Moment;
+export declare const getDateNow: (format?: string) => string;
+export declare const getDateTimeNow: (format?: string) => string;
+export declare const getCurrentYear: () => number;
+export declare const formatTime: (dateString: DateTypes) => string;
