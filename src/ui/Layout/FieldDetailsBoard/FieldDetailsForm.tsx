@@ -16,6 +16,7 @@ export const FieldDetailsForm = () => {
 
   const handleOnChange = ({ values }: OnChangeArgs) => {
     const hasChanges = Object.keys(values).find(
+      // @ts-ignore
       (k) => values[k] !== fieldDetails[k]
     );
 
